@@ -32,8 +32,7 @@ The analysis (via the script run_analysis.R contained in this repository) perfor
   * leading "t": replaced with more explicity "time." to indicate the sampling in the time domain
   * leading "f": replaced with more explicity "freq." to indicate the sampling in the frequency domain
 
-5. **Summarizing data**. A new data set is created containing the average of all variables by activity and subject. The averaged variables are renamed to reflect their new meaning by adding the prefix "avg.". The resulting data set is dumped into a text file called "dt_summary.txt"
-
+5. **Summarizing data**. A new data set is created containing the average of all variables by activity and subject. The averaged variables are renamed to reflect their new meaning by adding the prefix "avg.". The resulting data set is dumped into a text file called "dt_summary.txt".
 
 
 
