@@ -42,9 +42,9 @@ dt <- select(dt, act.id, subject, contains("mean()"), contains("std()"))
 
 # 3 ### Uses descriptive activity names to name the activities in the data set
 act.labels <- fread(file.path(work.dir, "activity_labels.txt"),
-                         col.names = c("act.id", "act.label"))
-dt <- merge(dt, act.labels, by = "act.id")
-dt <- select(dt, -act.id) # Removing (now) unnecessary activity id
+                         col.names = c("act.id", "activity"))
+dt <- merge(dt, act.labels, by = "act.id") %>%
+    select(-act.id) # Removing (now) unnecessary activity id
 
 # 4 ### Appropriately labels the data set with descriptive variable names
 new.head <- gsub("\\-", ".", colnames(dt))
@@ -56,8 +56,10 @@ colnames(dt) <- new.head
 # 5 ### From the data set in step 4, creates a second, independent tidy dat
     ### set with the average of each variable for each activity and each subject
 
-dt.summary <- summarise_each(group_by(dt, act.label, subject), "mean")
-dt.summary <- arrange(dt.summary, act.label, subject)
+dt.summary <- dt %>%
+    group_by(activity, subject) %>%
+    summarise_each("mean") %>%
+    arrange(activity, subject)
 
 # Renaming columns to reflect new content
 new.head <- sub("^time", "avg.time", colnames(dt.summary))
