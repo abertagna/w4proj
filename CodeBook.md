@@ -20,11 +20,11 @@ The analysis (via the script run_analysis.R contained in this repository) perfor
   
   During this step, one data table is created for each subset, merging column-wise all 3 kinds of variables. Finally, a unique table is created merging row-wise the 2 data tables previously created.
   
-  Variable names for the numerical measures, which are contained in a separate file, are read and properly associated to the resulting data table. Ids of subject and activity are manually dubbed as "subject" and "act.id".
+  Variable names for the recordings measures, which are contained in a separate file, are read and properly associated to the resulting data table. Ids of subject and activity are manually dubbed as "subject" and "act.id".
 
 2. **Variables selection**. During this step, variables that not represent mean or standard deviation of recordings are removed from the original data set. This is performed by retaining only variables whose name includes "mean()" or "std()", together with the subject and activity ids.
 
-3. **Activity identification**. A dictionary between each activity id (1 to 6) and its meaning (resp. WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) is provided in a separate file. The dictionary is read as a separate 2-columns data table and the activity meaning is associated to each row of the main data table via a join operation over the field "act.id". The field "act.id" is then dropped from the table to simplify the following summarizing activities.
+3. **Activity identification**. A dictionary between each activity id (1 to 6) and its meaning (resp. WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) is provided in a separate file. The dictionary is read as a separate 2-columns data table and the activity meaning is associated to each row of the main data table via a join operation over the field "act.id". The new factor variable with the activity meaning is dubbed "activity". The field "act.id" is then dropped from the table to simplify the following summarizing activities.
 
 4. **Variable names cleanup**. The following modifications are applied to the original variable names to make them more in line with the tidy data-set guidelines:
   * dash ("-"): replaced with period (".")
@@ -32,7 +32,8 @@ The analysis (via the script run_analysis.R contained in this repository) perfor
   * leading "t": replaced with more explicity "time." to indicate the sampling in the time domain
   * leading "f": replaced with more explicity "freq." to indicate the sampling in the frequency domain
 
-5. 
+5. **Summarizing data**. A new data set is created containing the average of all variables by activity and subject. The averaged variables are renamed to reflect their new meaning by adding the prefix "avg.". The resulting data set is dumped into a text file called "dt_summary.txt"
+
 
 
 
